@@ -14,9 +14,8 @@ public class ClientInputReader implements Runnable{
     @Override
     public void run() {
         while (Client.running){
-            String response = null;
             try {
-                response = in.readLine();
+                String response = in.readLine();
                 if(response.equals("")){
                     break;
                 }

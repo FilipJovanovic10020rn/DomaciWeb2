@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class Client {
 
     public static final int TCP_PORT = 9000;
-    public static volatile boolean running = true;
     public static final String hostname = "localhost";
+    public static volatile boolean running = true;
     public static void main(String[] args) {
 
         System.out.print("Enter username: ");
@@ -22,9 +22,6 @@ public class Client {
         PrintWriter out = null;
 
         try {
-            // odredi adresu racunara sa kojim se povezujemo
-//            InetAddress addr = InetAddress.getByName(hostname);
-
             // otvori socket prema drugom racunaru
             socket = new Socket(hostname, TCP_PORT);
 
@@ -42,10 +39,15 @@ public class Client {
             if (res.equals("existing user")){
                 throw new IllegalArgumentException("Username already logged in..");
             }
+            if (res.equals("bad word")){
+                throw new IllegalArgumentException("Username contains bad word.");
+            }
             System.out.println(res);
 
             // todo dohvati istoriju poruka
             // in.readline();
+
+
 
 
             Thread outputWriterThread = new Thread(new ClientWriter(scanner,out));
@@ -62,12 +64,8 @@ public class Client {
             out.close();
             socket.close();
 
-        } catch (UnknownHostException e1) {
-            e1.printStackTrace();
-        } catch (IOException e2) {
-            e2.printStackTrace();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
         } finally {
             if (in != null) {
                 try {

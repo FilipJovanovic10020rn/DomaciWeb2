@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class ClientWriter implements Runnable{
 
-    PrintWriter out;
-    Scanner scanner;
+    private PrintWriter out;
+    private Scanner scanner;
 
     public ClientWriter(Scanner scanner, PrintWriter out) {
         this.out = out;
