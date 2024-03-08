@@ -30,9 +30,9 @@ public class Server {
         badWords.add("poopoo");
 
         // todo probati ovako ali je ono okej
-//        Thread msgSender = new Thread(new ServerMessenger());
-//        msgSender.setDaemon(true);
-//        msgSender.start();
+        Thread msgSender = new Thread(new ServerMessenger());
+        msgSender.setDaemon(true);
+        msgSender.start();
 
         try {
             ServerSocket ss = new ServerSocket(TCP_PORT);

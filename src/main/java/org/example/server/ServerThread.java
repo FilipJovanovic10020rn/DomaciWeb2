@@ -1,6 +1,7 @@
 package org.example.server;
 
 import org.example.server.Server;
+import org.example.server.mesenger.UserMessage;
 
 import java.io.*;
 import java.net.Socket;
@@ -47,12 +48,14 @@ public class ServerThread extends Thread{
         }
         String formattedMsg = "["+time +"] - " + username + ": " + censoredMsg;
 
-        addToHistory(formattedMsg);
-        send(formattedMsg);
+//        addToHistory(formattedMsg);
+//        send(formattedMsg);
 
-//        Server.messagesToBeSent.add(new UserMessage(username, formattedMsg));
+        // ako crkne ovo zakomentarisati
+        Server.messagesToBeSent.add(new UserMessage(username, formattedMsg));
     }
 
+    // prebacio sam u serverMsg thread koji sluzi za slanje poruka svima zbog redosleda
     private void addToHistory(String msg){
         if(Server.history.size() == 100){
             for(int i =0; i < Server.history.size();i++){
